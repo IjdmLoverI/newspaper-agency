@@ -25,3 +25,8 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
     model = Topic
     paginate_by = 10
 
+
+class RedactorListView(LoginRequiredMixin, generic.ListView):
+    model = Redactor
+    paginate_by = 10
+
