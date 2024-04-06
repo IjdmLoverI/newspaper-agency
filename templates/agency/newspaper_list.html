@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Newspaper List</h1>
-
+  <h1>Newspaper List <a href="{% url 'agency:newspaper-create' %}">+</a></h1>
+  
   {% if object_list %}
     <ul>
       {% for newspaper in object_list %}
         <li>
           <h2>{{ newspaper.title }}</h2>
           <p>Published on: {{ newspaper.pub_date }}</p>
-          <p>Topic: {{ newspaper.topic.name }}</p>
-          <p>Publishers:</p>
+          <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
+          <p>Content: {{ newspaper.content|truncatechars:50 }}</p>
+          <p><strong>Publishers:</strong></p>
           <ul>
             {% for publisher in newspaper.publishers.all %}
               <li>{{ publisher.username }}</li>

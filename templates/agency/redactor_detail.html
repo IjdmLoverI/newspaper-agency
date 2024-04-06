@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Redactor Details</h1>
+  <p><strong>Username:</strong> {{ redactor.username }}</p>
+  <p><strong>First Name:</strong> {{ redactor.first_name }}</p>
+  <p><strong>Last Name:</strong> {{ redactor.last_name }}</p>
+  <p><strong>Years of Experience:</strong> {{ redactor.years_of_experience }}</p>
+
+  <h2>Newspapers Written by Redactor</h2>
+  {% if redactor.newspapers.all %}
+    <ul>
+      {% for newspaper in redactor.newspapers.all %}
+        <li>
+          <a href="{% url 'agency:newspaper-detail' newspaper.id %}">{{ newspaper.topic.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>This redactor has not written any newspapers yet.</p>
+  {% endif %}
+{% endblock %}
