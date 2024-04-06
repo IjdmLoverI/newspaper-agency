@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Newspaper List</h1>
+
+  {% if object_list %}
+    <ul>
+      {% for newspaper in object_list %}
+        <li>
+          <h2>{{ newspaper.title }}</h2>
+          <p>Published on: {{ newspaper.pub_date }}</p>
+          <p>Topic: {{ newspaper.topic.name }}</p>
+          <p>Publishers:</p>
+          <ul>
+            {% for publisher in newspaper.publishers.all %}
+              <li>{{ publisher.username }}</li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no newspapers available.</p>
+  {% endif %}
+{% endblock %}

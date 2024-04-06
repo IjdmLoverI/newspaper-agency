@@ -30,3 +30,7 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
     model = Redactor
     paginate_by = 10
 
+
+class NewspaperViewList(LoginRequiredMixin, generic.ListView):
+    model = Newspaper
+    paginate_by = 10
