@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.views import generic
 
 from agency.models import Redactor, Topic, Newspaper
 
@@ -17,3 +19,9 @@ def index(request):
         "num_newspapers": num_newspapers,
     }
     return render(request, "agency/index.html", context=context)
+
+
+class TopicListView(LoginRequiredMixin, generic.ListView):
+    model = Topic
+    paginate_by = 10
+
