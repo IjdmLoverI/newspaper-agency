@@ -8,19 +8,10 @@ from agency.models import Redactor, Newspaper, Topic
 class RedactorAdmin(admin.ModelAdmin):
     list_display = UserAdmin.list_display + ("years_of_experience",)
     fieldsets = UserAdmin.fieldsets + (
-        (("Additional Information", {"fields": ("years_of_experience", )}),)
+        (("Additional Information", {"fields": ("years_of_experience",)}),)
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (
-            (
-                "Additional Information",
-                {
-                    "fields": (
-                        "years_of_experience"
-                    )
-                }
-            )
-        )
+        (("Additional Information", {"fields": ("years_of_experience")}))
     )
 
 
