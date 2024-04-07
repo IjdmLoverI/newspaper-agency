@@ -25,14 +25,20 @@ class NewspaperCreateForm(forms.ModelForm):
 
     class Meta:
         model = Newspaper
-        fields = ['title', 'content', 'publishers', 'topic_name']
+        fields = ["title", "content", "publishers", "topic_name"]
 
     def save(self, commit=True):
         newspaper = super().save(commit=False)
-        topic_name = self.cleaned_data.get('topic_name')
+        topic_name = self.cleaned_data.get("topic_name")
         topic, created = Topic.objects.get_or_create(name=topic_name)
         newspaper.topic = topic
         if commit:
             newspaper.save()
             self.save_m2m()
         return newspaper
+
+
+class TopicCreateForm(forms.ModelForm):
+    class Meta:
+        model = Topic
+        fields = ["name"]

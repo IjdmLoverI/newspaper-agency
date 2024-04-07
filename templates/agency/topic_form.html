@@ -1,15 +1,11 @@
 {% extends "base.html" %}
 
-{% load crispy_forms_tags %}
-
 {% block content %}
-  <h2>
-    Create Redactor
-  <a class="btn btn-secondary" href="{% url 'agency:redactor-detail' pk=redactor.id %}">Back</a>
-  </h2>
+  <h1>Create Topic</h1>
   <form method="POST">
     {% csrf_token %}
-    {{ form }}
+    {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Submit</button>
+    <a class="btn btn-secondary" href="{% url 'agency:topic-detail' pk=topic.id %}">Cancel</a>
   </form>
 {% endblock %}

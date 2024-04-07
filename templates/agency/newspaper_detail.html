@@ -17,7 +17,7 @@
   <p><strong>Title:</strong> {{ newspaper.title }}</p>
   <p><strong>Content:</strong> {{ newspaper.content }}</p>
   <p><strong>Publication Date:</strong> {{ newspaper.pub_date }}</p>
-  <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
+  <p><strong>Topic:</strong> <a href="{% url 'agency:topic-detail' pk=newspaper.topic.id %}">{{ newspaper.topic.name }}</a></p>
   <p><strong>Publishers:</strong> 
     {% for redactor in newspaper.publishers.all %}
       <a class="btn btn-primary" href="{% url 'agency:redactor-detail' pk=redactor.id %}">{{ redactor.username }}</a>
