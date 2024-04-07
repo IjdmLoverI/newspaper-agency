@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>
+    Topic Details
+    <a class="btn btn-secondary" href="{% url 'agency:topic-list' %}">
+      Back
+    </a>
+    <a class="btn btn-secondary" href="{% url 'agency:topic-update' pk=topic.id %}">
+      Update
+    </a>
+      <a class="btn btn-danger" href="{% url 'agency:topic-delete' pk=topic.id %}">
+        Delete
+      </a>
+  </h2>
+  <p><strong>Name:</strong> {{ topic.name }}</p>
+
+  <h2>Newspapers with this Topic</h2>
+  {% if topic.newspaper_set.all %}
+    <ul>
+      {% for newspaper in topic.newspaper_set.all %}
+        <li>
+          <a href="{% url 'agency:newspaper-detail' newspaper.id %}">{{ newspaper.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No newspapers are available for this topic.</p>
+  {% endif %}
+{% endblock %}
