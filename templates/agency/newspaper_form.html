@@ -3,7 +3,10 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <h2>Create Redactor</h2>
+  <h2>
+    Create Newspaper
+    <a class="btn btn-secondary" href="{% url 'agency:newspaper-list' %}">Back</a>
+  </h2>
   <form method="POST">
     {% csrf_token %}
     {{ form }}

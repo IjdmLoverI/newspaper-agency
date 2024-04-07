@@ -28,6 +28,11 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
 
+class TopicDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Topic
+    success_url = reverse_lazy("agency:topic-detail")
+
+
 class RedactorListView(LoginRequiredMixin, generic.ListView):
     model = Redactor
     paginate_by = 10
@@ -42,6 +47,12 @@ class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Redactor
     success_url = reverse_lazy("agency:redactor-detail")
+
+
+class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Redactor
+    success_url = reverse_lazy("agency:redactor-list")
+    template_name = "agency/redactor_confirm_delete.html"
 
 
 class NewspaperViewList(LoginRequiredMixin, generic.ListView):
@@ -73,8 +84,3 @@ class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_success_url(self):
         return reverse("agency:newspaper-detail", kwargs={"pk": self.object.pk})
-
-
-class TopicDetailView(LoginRequiredMixin, generic.DetailView):
-    model = Topic
-    success_url = reverse_lazy("agency:topic-detail")
