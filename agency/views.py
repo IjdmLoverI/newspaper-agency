@@ -73,3 +73,8 @@ class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_success_url(self):
         return reverse("agency:newspaper-detail", kwargs={"pk": self.object.pk})
+
+
+class TopicDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Topic
+    success_url = reverse_lazy("agency:topic-detail")

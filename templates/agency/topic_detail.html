@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Topic Details</h2>
+  <p><strong>Name:</strong> {{ topic.name }}</p>
+
+  <h2>Newspapers with this Topic</h2>
+  {% if topic.newspaper_set.all %}
+    <ul>
+      {% for newspaper in topic.newspaper_set.all %}
+        <li>
+          <a href="{% url 'agency:newspaper-detail' newspaper.id %}">{{ newspaper.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No newspapers are available for this topic.</p>
+  {% endif %}
+{% endblock %}
