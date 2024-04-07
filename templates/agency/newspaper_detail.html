@@ -5,7 +5,14 @@
     <a class="btn btn-secondary" href="{% url 'agency:newspaper-list' %}">
       Back
     </a>
-    <a class="btn btn-danger" href="{% url 'agency:newspaper-delete' pk=newspaper.id %}">Delete</a>
+    <a 
+        class="btn btn-danger" href="{% url 'agency:newspaper-delete' pk=newspaper.id %}">
+      Delete
+    </a>
+    <a 
+        class="btn btn-primary" href="{% url 'agency:newspaper-update' pk=newspaper.id %}">
+      Update
+    </a>
   </h2>
   <p><strong>Title:</strong> {{ newspaper.title }}</p>
   <p><strong>Content:</strong> {{ newspaper.content }}</p>

@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 
 from agency.models import Redactor, Topic, Newspaper
@@ -64,3 +64,12 @@ class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Newspaper
     success_url = reverse_lazy("agency:newspaper-list")
     template_name = "agency/newspaper_confirm_delete.html"
+
+
+class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Newspaper
+    fields = ["title", "content"]
+    template_name = "agency/newspaper_form.html"
+
+    def get_success_url(self):
+        return reverse("agency:newspaper-detail", kwargs={"pk": self.object.pk})
