@@ -16,6 +16,7 @@ from agency.views import (
     RedactorUpdateView,
     TopicUpdateView,
     TopicDeleteView,
+    TopicCreateView,
 )
 
 urlpatterns = [
@@ -52,6 +53,7 @@ urlpatterns = [
     ),
     path("topics/<int:pk>/update", TopicUpdateView.as_view(), name="topic-update"),
     path("topics/<int:pk>/delete", TopicDeleteView.as_view(), name="topic-delete"),
+    path("topics/create", TopicCreateView.as_view(), name="topic-create")
 ]
 
 app_name = "agency"

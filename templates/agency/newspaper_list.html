@@ -1,8 +1,12 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>Newspaper List <a href="{% url 'agency:newspaper-create' %}">+</a></h1>
-  
+  <h1>Newspaper List <a class="btn btn-primary" href="{% url 'agency:newspaper-create' %}">Create</a></h1>
+  <form method="get" action="" class="form-inline">
+    {{ search_form|crispy }}
+    <input type="submit" value="Search" class="btn btn-secondary">
+  </form>
   {% if object_list %}
     <ul>
       {% for newspaper in object_list %}
@@ -15,7 +19,7 @@
           <p><strong>Publishers:</strong></p>
           <ul>
             {% for publisher in newspaper.publishers.all %}
-              <li>{{ publisher.username }}</li>
+              <li>a{{ publisher.username }}</li>
             {% endfor %}
           </ul>
         </li>
