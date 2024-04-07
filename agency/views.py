@@ -55,6 +55,14 @@ class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
     template_name = "agency/redactor_confirm_delete.html"
 
 
+class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Redactor
+    fields = ["username", "years_of_experience", "email"]
+
+    def get_success_url(self):
+        return reverse("agency:redactor-detail", kwargs={"pk": self.object.pk})
+
+
 class NewspaperViewList(LoginRequiredMixin, generic.ListView):
     model = Newspaper
     paginate_by = 10
