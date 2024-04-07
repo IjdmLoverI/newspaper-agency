@@ -1,15 +1,16 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% load crispy_forms_tags %}
 
 {% block content %}
   <h2>
     Create Newspaper
-    <a class="btn btn-secondary" href="{% url 'agency:newspaper-list' %}">Back</a>
+    <a class="btn btn-secondary" href="{% url 'agency:newspaper-list' %}">Cancel</a>
   </h2>
   <form method="POST">
     {% csrf_token %}
-    {{ form }}
+    {{ form|crispy }}
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 {% endblock %}
