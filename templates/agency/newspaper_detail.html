@@ -1,14 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Newspaper Details</h2>
+  <h2>Newspaper Details 
+    <a class="btn btn-secondary" href="{% url 'agency:newspaper-list' %}">
+      Back
+    </a>
+    <a class="btn btn-danger" href="{% url 'agency:newspaper-delete' pk=newspaper.id %}">Delete</a>
+  </h2>
   <p><strong>Title:</strong> {{ newspaper.title }}</p>
   <p><strong>Content:</strong> {{ newspaper.content }}</p>
   <p><strong>Publication Date:</strong> {{ newspaper.pub_date }}</p>
   <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
   <p><strong>Publishers:</strong> 
     {% for redactor in newspaper.publishers.all %}
-      {{ redactor.username }}
+      <a class="btn btn-primary" href="{% url 'agency:redactor-detail' pk=redactor.id %}">{{ redactor.username }}</a>
       {% if not forloop.last %}, {% endif %}
     {% endfor %}
   </p>
