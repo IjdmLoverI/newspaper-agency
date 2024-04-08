@@ -1,27 +1,65 @@
-{% extends "base.html" %}
+{% extends 'layouts/base.html' %}
+
+{% block title %} Author {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} blog-author bg-gray-100 {% endblock body_class %}
 
 {% block content %}
-  <h2>Newspaper Details 
-    <a class="btn btn-secondary" href="{% url 'agency:newspaper-list' %}">
-      Back
-    </a>
-    <a 
-        class="btn btn-danger" href="{% url 'agency:newspaper-delete' pk=newspaper.id %}">
-      Delete
-    </a>
-    <a 
-        class="btn btn-primary" href="{% url 'agency:newspaper-update' pk=newspaper.id %}">
-      Update
-    </a>
-  </h2>
-  <p><strong>Title:</strong> {{ newspaper.title }}</p>
-  <p><strong>Content:</strong> {{ newspaper.content }}</p>
-  <p><strong>Publication Date:</strong> {{ newspaper.pub_date }}</p>
-  <p><strong>Topic:</strong> <a href="{% url 'agency:topic-detail' pk=newspaper.topic.id %}">{{ newspaper.topic.name }}</a></p>
-  <p><strong>Publishers:</strong> 
-    {% for redactor in newspaper.publishers.all %}
-      <a class="btn btn-primary" href="{% url 'agency:redactor-detail' pk=redactor.id %}">{{ redactor.username }}</a>
-      {% if not forloop.last %}, {% endif %}
-    {% endfor %}
-  </p>
-{% endblock %}
+
+  {% include "includes/navigation.html" %}
+
+  <div class="container">
+    <br><br><br><br>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h2 class="text-center">Newspaper Details</h2>
+        <table class="table table-bordered text-center">
+          <tbody>
+            <tr>
+              <td><strong>Title:</strong></td>
+              <td>{{ newspaper.title }}</td>
+            </tr>
+            <tr>
+              <td><strong>Content:</strong></td>
+              <td>{{ newspaper.content }}</td>
+            </tr>
+            <tr>
+              <td><strong>Publication Date:</strong></td>
+              <td>{{ newspaper.pub_date }}</td>
+            </tr>
+            <tr>
+              <td><strong>Topic:</strong></td>
+              <td><a href="{% url 'agency:topic-detail' pk=newspaper.topic.id %}">{{ newspaper.topic.name }}</a></td>
+            </tr>
+            <tr>
+              <td><strong>Publishers:</strong></td>
+              <td>
+                {% for redactor in newspaper.publishers.all %}
+                  <a class="btn btn-primary" href="{% url 'agency:redactor-detail' pk=redactor.id %}">{{ redactor.username }}</a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center">
+          <a class="btn btn-secondary" href="{% url 'agency:newspaper-list' %}">Back</a>
+          <a class="btn btn-danger" href="{% url 'agency:newspaper-delete' pk=newspaper.id %}">Delete</a>
+          <a class="btn btn-primary" href="{% url 'agency:newspaper-update' pk=newspaper.id %}">Update</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+
+  <script src="{{ ASSETS_ROOT }}/js/soft-design-system.min.js?v=1.0.1" type="text/javascript"></script>
+
+{% endblock javascripts %}

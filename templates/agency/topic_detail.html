@@ -1,30 +1,62 @@
-{% extends "base.html" %}
+{% extends 'layouts/base.html' %}
 
-{% block content %}
-  <h2>
-    Topic Details
-    <a class="btn btn-secondary" href="{% url 'agency:topic-list' %}">
-      Back
-    </a>
-    <a class="btn btn-secondary" href="{% url 'agency:topic-update' pk=topic.id %}">
-      Update
-    </a>
-      <a class="btn btn-danger" href="{% url 'agency:topic-delete' pk=topic.id %}">
-        Delete
-      </a>
-  </h2>
-  <p><strong>Name:</strong> {{ topic.name }}</p>
+{% block title %} Author {% endblock title %}
 
-  <h2>Newspapers with this Topic</h2>
-  {% if topic.newspaper_set.all %}
-    <ul>
-      {% for newspaper in topic.newspaper_set.all %}
-        <li>
-          <a href="{% url 'agency:newspaper-detail' newspaper.id %}">{{ newspaper.title }}</a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No newspapers are available for this topic.</p>
-  {% endif %}
-{% endblock %}
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} blog-author bg-gray-100 {% endblock body_class %}
+
+{{% block content %}
+
+  {% include "includes/navigation.html" %}
+
+  <div class="container">
+    <br><br><br><br>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h2 class="text-center">Topic Details</h2>
+        <div class="btn-group mb-3">
+          <a class="btn btn-secondary" href="{% url 'agency:topic-list' %}">Back</a>
+          <a class="btn btn-secondary" href="{% url 'agency:topic-update' pk=topic.id %}">Update</a>
+          <a class="btn btn-danger" href="{% url 'agency:topic-delete' pk=topic.id %}">Delete</a>
+        </div>
+        <table class="table table-bordered text-center">
+          <tbody>
+            <tr>
+              <td><strong>Name:</strong></td>
+              <td>{{ topic.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h2 class="text-center">Newspapers with this Topic</h2>
+        {% if topic.newspaper_set.all %}
+          <table class="table table-bordered text-center">
+            <tbody>
+              <tr>
+                <td>
+                  {% for newspaper in topic.newspaper_set.all %}
+                    <a class="btn btn-secondary" href="{% url 'agency:newspaper-detail' newspaper.id %}">{{ newspaper.title }}</a>{% if not forloop.last %}, {% endif %}
+                  {% endfor %}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        {% else %}
+          <p class="text-center">No newspapers are available for this topic.</p>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+  <script src="{{ ASSETS_ROOT }}/js/soft-design-system.min.js?v=1.0.1" type="text/javascript"></script>
+
+{% endblock javascripts %}

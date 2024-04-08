@@ -67,6 +67,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "agency.context_processors.cfg_assets_root",
             ],
         },
     },
@@ -127,6 +128,8 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = (BASE_DIR / "static", )
+
+ASSETS_ROOT = "/static/assets"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
