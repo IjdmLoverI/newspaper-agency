@@ -1,33 +1,77 @@
-{% extends "base.html" %}
+{% extends 'layouts/base.html' %}
+
+{% block title %} Author {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} blog-author bg-gray-100 {% endblock body_class %}
 
 {% block content %}
-  <h1>
-    Redactor Details
-    <a 
-        class="btn btn-primary" href="{% url 'agency:redactor-update' pk=redactor.pk %}">
-      Update
-    </a>
-    <a
-        class="btn btn-danger" href="{% url 'agency:redactor-delete' pk=redactor.id %}">
-      Delete
-    </a>
-  </h1>
-  <p><strong>Username:</strong> {{ redactor.username }}</p>
-  <p><strong>First Name:</strong> {{ redactor.first_name }}</p>
-  <p><strong>Last Name:</strong> {{ redactor.last_name }}</p>
-  <p><strong>E-mail:</strong>{{ redactor.email }}</p>
-  <p><strong>Years of Experience:</strong> {{ redactor.years_of_experience }}</p>
 
-  <h2>Newspapers Written by Redactor</h2>
-  {% if redactor.newspapers.all %}
-    <ul>
-      {% for newspaper in redactor.newspapers.all %}
-        <li>
-          <a href="{% url 'agency:newspaper-detail' newspaper.id %}">{{ newspaper.topic.name }}</a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>This redactor has not written any newspapers yet.</p>
-  {% endif %}
-{% endblock %}
+  {% include "includes/navigation.html" %}
+  
+  
+
+  <div class="container">
+    <div class="row justify-content-center align-items-center vh-100">
+      <div class="col-md-8">
+        <h1 class="font-weight-bold mb-4">
+          Redactor Details
+          <a class="btn btn-secondary ms-3" href="{% url 'agency:redactor-list' %}">Back</a>
+          <a class="btn btn-primary ms-3" href="{% url 'agency:redactor-update' pk=redactor.pk %}">Update</a>
+          <a class="btn btn-danger ms-2" href="{% url 'agency:redactor-delete' pk=redactor.id %}">Delete</a>
+        </h1>
+        <div class="table-responsive">
+          <table class="table table-striped mx-auto">
+            <tbody>
+              <tr>
+                <th>Username</th>
+                <td>{{ redactor.username }}</td>
+              </tr>
+              <tr>
+                <th>First Name</th>
+                <td>{{ redactor.first_name }}</td>
+              </tr>
+              <tr>
+                <th>Last Name</th>
+                <td>{{ redactor.last_name }}</td>
+              </tr>
+              <tr>
+                <th>E-mail</th>
+                <td>{{ redactor.email }}</td>
+              </tr>
+              <tr>
+                <th>Years of Experience</th>
+                <td>{{ redactor.years_of_experience }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 class="font-weight-bold mb-3">Newspapers Written by Redactor</h2>
+        {% if redactor.newspapers.all %}
+          <ul class="list-group">
+            {% for newspaper in redactor.newspapers.all %}
+              <li class="list-group-item">
+                <a href="{% url 'agency:newspaper-detail' newspaper.id %}">{{ newspaper.topic.name }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="mt-3">This redactor has not written any newspapers yet.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  
+  
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+
+  <script src="{{ ASSETS_ROOT }}/js/soft-design-system.min.js?v=1.0.1" type="text/javascript"></script>
+
+{% endblock javascripts %}

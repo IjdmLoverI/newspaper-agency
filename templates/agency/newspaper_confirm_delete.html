@@ -1,11 +1,38 @@
-{% extends "base.html" %}
+{% extends 'layouts/base-fullscreen.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %} Sign UP {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} sign-in-illustration {% endblock body_class %}
 
 {% block content %}
-  <h1>Confirm delete</h1>
-	<p>Delete <b>{{ newspaper.title  }}</b>?</p>
-  <form action="" method="post">
-    {% csrf_token %}
-    <a href="{% url 'agency:newspaper-list' %}" class="btn btn-primary">Cancel</a>
-    <input type="submit" value="Delete" class="btn btn-danger">
-  </form>
-{% endblock %}
+
+  {% include "includes/navigation.html" %}
+  <br><br><br><br>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h1 class="text-center">Confirm Delete</h1>
+        <p class="text-center">Delete <strong>{{ newspaper.title }}</strong>?</p>
+        <form action="{% url 'agency:newspaper-delete' pk=newspaper.id %}" method="post">
+          {% csrf_token %}
+          <div class="text-center">
+            <a href="{% url 'agency:newspaper-list' %}" class="btn btn-primary">Cancel</a>
+            <input type="submit" value="Delete" class="btn btn-danger">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+  <script src="{{ ASSETS_ROOT }}/js/soft-design-system.min.js?v=1.0.1" type="text/javascript"></script>
+
+{% endblock javascripts %}
