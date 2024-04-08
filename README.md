@@ -23,4 +23,5 @@ python manage.py runserver
 * Managing newspapers and topics
 * Powerful admin panel
 
-
+Demo
+![Website interface](demo.png)
