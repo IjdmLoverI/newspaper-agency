@@ -1,0 +1,49 @@
+<div class="container position-sticky z-index-sticky top-0 d-flex align-items-center">
+  <div class="row">
+    <div class="col-12">
+      <nav class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+        <div class="container-fluid">
+          <a class="navbar-brand font-weight-bolder ms-sm-3"
+             href="/" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom">
+            Best Newspaper Agency
+          </a>
+          <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
+                  aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon mt-2">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </span>
+          </button>
+          <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0" id="navigation">
+            <ul class="navbar-nav navbar-nav-hover ms-lg-12 ps-lg-5 w-100"
+                style="padding-left: 20px; padding-right: 20px;">
+              <li class="list-item"><a href="{% url 'agency:index' %}" style="padding-left: 20px; padding-right: 20px;">Home</a>
+              </li>
+              <li class="list-item"><a href="{% url 'agency:topic-list' %}"
+                                       style="padding-left: 20px; padding-right: 20px;">Topics</a></li>
+              <li class="list-item"><a href="{% url 'agency:newspaper-list' %}"
+                                       style="padding-left: 20px; padding-right: 20px;">Articles</a></li>
+              <li class="list-item"><a href="{% url 'agency:redactor-list' %}"
+                                       style="padding-left: 20px; padding-right: 20px;">Redactors</a></li>
+              <br>
+              {% if user.is_authenticated %}
+                <li class="list-item">   User: <a href="{{ user.get_absolute_url }}" >{{ user.get_username }}</a></li>
+                <li class="list-item">
+                  <form method="post" action="{% url 'logout' %}" style="padding-left: 20px; padding-right: 20px;">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}" style="padding-left: 20px; padding-right: 20px;">
+                    <button class="btn btn-primary" type="submit" style="padding-left: 20px; padding-right: 20px; padding-top: 10px";>Logout</button>
+                  </form>
+                </li>
+              {% else %}
+                <li class="list-item"><a href="{% url 'login' %}?next={{ request.path }}" style="padding-left: 20px; padding-right: 20px;">Login</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
