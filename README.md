@@ -16,6 +16,12 @@ virtualenv venv
 source venv/Scripts/activate
 python manage.py runserver
 ````
+# Test User: 
+username: user
+password: user12345
+
+# Link:
+https://newspaper-agency-3h3q.onrender.com
 
 # Features
 
